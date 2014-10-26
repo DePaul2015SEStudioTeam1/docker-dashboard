@@ -8,20 +8,17 @@ import java.io.IOException;
 import djohn.microservices.data.Data;
 import djohn.microservices.data.DataName;
 
-/**
- * 
- * @author Jet2kus84
- *
- */
-final class DiskData implements Data {
+final class FreeMemoryData implements Data {
 
 	@Override
 	public void getData(StringBuilder b) {
+		
 		try {
 			
-			File f = new File("diskFile.txt");
+			File file = new File("FreeMemoryFile.txt");
 			
-			BufferedReader readFrom = new BufferedReader(new FileReader(f));
+			//create a file reader
+			BufferedReader readFrom = new BufferedReader(new FileReader(file));
 			
 			String line = null;
 			java.util.StringTokenizer token;
@@ -29,7 +26,7 @@ final class DiskData implements Data {
 			while((line = readFrom.readLine()) != null) {
 		
 				//Windows OS
-				if(line.indexOf("C:\\") != -1) {
+				if(line.indexOf("Mem:") != -1) {
 					token = new java.util.StringTokenizer(line.trim().substring(WINDOWS_OS_START));
 					buildString(token, b);
 				}
@@ -40,26 +37,26 @@ final class DiskData implements Data {
 					buildString(token, b);
 				}
 			}
-			
-			//close reader
+					
 			readFrom.close();
 			
-			//delete file from directory
-			f.deleteOnExit();
-		} catch(IOException e) { e.printStackTrace(); }
-	}
-
-	@Override
-	public DataName getDataName() {
-		return DataName.DISK;
+			file.deleteOnExit();
+		
+		} catch (IOException e) { System.err.print("Issue opening file"); }
 	}
 
 	private void buildString(java.util.StringTokenizer token, StringBuilder b) {
-		b.append("Total disk space: " + token.nextToken() + "<br>");
-		b.append("Used disk space: " + token.nextToken() + "<br>");
-		b.append("Available disk space: " + token.nextToken() + "<br>");
+		b.append("Total Memory: " + token.nextToken() + "<br>");
+		b.append("Used Memory: " + token.nextToken() + "<br>");
+		b.append("Free Memory: " + token.nextToken() + "<br>");
 	}
 	
-	private final int WINDOWS_OS_START = 3;
+	@Override
+	public DataName getDataName() {
+		return DataName.VOLUME;
+	}
+
+	private final int WINDOWS_OS_START = 8;
 	private final int OS_X_START = 13;
+	
 }

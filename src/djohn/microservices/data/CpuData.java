@@ -13,39 +13,45 @@ import djohn.microservices.data.DataName;
  * @author Jet2kus84
  *
  */
-final class IpData implements Data {
+final class CpuData implements Data {
 
 	@Override
 	public void getData(StringBuilder b) {
 		
 		try {
 			
-			File f = new File("ipFile.txt");
+			File f = new File("cpuFile.txt");
 			
 			BufferedReader readFrom = new BufferedReader(new FileReader(f));
 			
-			//find a position to start and find the ip data
 			String line = null;
 			
 			while((line = readFrom.readLine()) != null) {
-		
-				//get address info
-				if((line.indexOf("ip address") != -1) || 
-						(line.indexOf("mac address") != -1) ||
-						(line.indexOf("host name") != -1)) {
+				
+				//get host name
+				if((line.indexOf("CPUs") != -1) || 
+					(line.indexOf("Model") != -1) || 
+					(line.indexOf("Cores") != -1) ||
+					(line.indexOf("Vendor") != -1) ||
+					(line.indexOf("Physical Memory") != -1))
+				
+				{
 					b.append(line.trim() + "<br>");
 				}
+				
 			}
 			
+			//close reader
 			readFrom.close();
 			
+			//delete file from directory
 			f.deleteOnExit();
-		} catch(IOException e) { System.err.print("Issue opening file"); }
+		} catch(IOException e) { e.printStackTrace(); }
 		
 	}
 	
 	@Override
 	public DataName getDataName() {
-		return DataName.IP;
+		return DataName.SYSTEM;
 	}
 }

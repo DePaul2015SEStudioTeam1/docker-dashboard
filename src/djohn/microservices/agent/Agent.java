@@ -5,14 +5,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import djohn.microservices.data.DataManager;
-import djohn.microservices.data.DataName;
-import djohn.microservices.data.DiskData;
-import djohn.microservices.data.IpData;
-import djohn.microservices.data.SystemData;
-import djohn.microservices.data.VersionData;
-import djohn.microservices.data.VolumeData;
 
+import djohn.microservices.agent.Agent;
+import djohn.microservices.data.DataLoader;
+import djohn.microservices.data.DataManager;
+import djohn.microservices.scripts.ScriptLoader;
+import djohn.microservices.scripts.ScriptManager;
+import djohn.microservices.scripts.ScriptType;
+
+/**
+ * 
+ * @author Jet2kus84
+ *
+ */
 public class Agent {
 
 	public static void main(String[] args) {
@@ -21,94 +26,80 @@ public class Agent {
 	
 	public void run() {
 	
-		//create a batch file dynamically
-		this.createBatchFile();
+		//retrieve current OS type
+		ScriptType currentOS = null;
 		
-		try {
-			
-			//run batch file
-			Desktop.getDesktop().open(batchFile);
-			
-			//wait for data to be loaded
-			try {
-				Thread.sleep(9000);
-			} catch (InterruptedException e) { e.printStackTrace(); }
+		//create file object for scripts
+		ScriptManager.getInstance().createScripts();
 		
-			//remove batch file from directory
-			batchFile.deleteOnExit();
-			
-		} catch(IOException e) { 
-			System.err.print("Issue occurred when attempting to open file");
+		//run appropriate script
+		if(ScriptManager.getInstance().canExecuteScript(ScriptType.DOS)) {
+			ScriptManager.getInstance().runScript(ScriptType.DOS);
+			currentOS = ScriptType.DOS;
+		} 
+		else if(ScriptManager.getInstance().canExecuteScript(ScriptType.UNIX)) {
+			ScriptManager.getInstance().runScript(ScriptType.UNIX);
+			currentOS = ScriptType.UNIX;
 		}
-
-		DataManager.Instance().getData(DataName.VOLUME,b);
-		DataManager.Instance().getData(DataName.VERSION,b);
-		DataManager.Instance().getData(DataName.IP,b);
-		DataManager.Instance().getData(DataName.SYSTEM,b);
-		DataManager.Instance().getData(DataName.DISK,b);
+		else {
+			
+			File f = new File("log.html");
+			try {
+				
+				PrintWriter w = new PrintWriter(f);
+				w.write("<html><title>404</title><body>" +
+						"<h1>Can not run on this OS</h1></body></html>");
+				w.flush();
+				w.close();
+				
+			} catch (FileNotFoundException e1) { e1.printStackTrace(); }
+			
+			try {
+				Desktop.getDesktop().open(f);
+			} catch (IOException e) { System.err.print("Problem occurred when opening log file"); }
+			
+			//exit program if script doesn't work for OS
+			System.exit(0);
+		}
 		
-		
-		//write to log file
-		writeTo.print(b + "</p></fieldset>Log details " +
+		//wait for data to be retrieved
+		try {
+			Thread.sleep(WAIT_TIME_IN_MILLIS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	
+		//get data loaded into program
+		DataManager.getInstance().getAllData(b);
+				
+		//write end of html log file
+		b.append("</p></fieldset>Log details " +
 				"provided by Deonte Johnson</body></html>");
 		
-		//close log file
-		writeTo.close();
-		
-		//open the html log file
-		try {
-			Desktop.getDesktop().open(log);
-		} catch (IOException e) { System.err.print("Problem occurred when opening log file"); }
+		ScriptManager.getInstance().writeToLogFile(b, currentOS);
+		ScriptManager.getInstance().openLog(currentOS);
 		
 	}
 	
 	public Agent() {
+					
+		//load in data objects
+		DataLoader.load();
 		
-		DataManager.Instance().addData(new VolumeData());
-		DataManager.Instance().addData(new VersionData());
-		DataManager.Instance().addData(new IpData());
-		DataManager.Instance().addData(new SystemData());
-		DataManager.Instance().addData(new DiskData());
+		//load in script objects
+		ScriptLoader.load();
 		
-		batchFile = new File("systeminfo.bat");
-		log = new File("log.html");
-		
+		//gather data
 		b = new StringBuilder();
 		
 		//write initial html script
 		b.append("<html><title>Log</title><body bgcolor=#F8F8F8>" +
 				"<h1 align=center>System Log</h1><hr><p align=center>" +
 				new java.util.Date() +
-				"</p><fieldset><p>");
-		
-		try {
-			writeTo = new PrintWriter(log);
-			w = new PrintWriter(batchFile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-				
+				"</p><fieldset><p>");			
 	}
-	private void createBatchFile() {
-		
-		//commands for batch file
-		String b = "echo off\n" + "fsutil volume diskfree C:>diskFile.txt\n" + "vol>file.txt\n" + "ver>file2.txt\n" +
-		 "ipconfig>ipFile.txt\n" + "systeminfo.exe | find /V /I " + "\"hotfix\"" +
-				" | find /V " + "\"KB\"" + " > systemFile.txt";
-		
-		//write commands to batch file
-		w.write(b);
-		
-		//ensure everything is written
-		w.flush();
-		
-		//close file
-		w.close();
-	}
-
-	private PrintWriter writeTo;
-	private PrintWriter w;
-	private File batchFile;
-	private File log;
+	
+	private final int WAIT_TIME_IN_MILLIS = 5000;
 	private StringBuilder b;
+	
 }

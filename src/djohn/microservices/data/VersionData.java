@@ -5,14 +5,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class VersionData implements Data {
+import djohn.microservices.data.Data;
+import djohn.microservices.data.DataName;
+
+final class VersionData implements Data {
 
 	@Override
 	public void getData(StringBuilder b) {
 		try {
 			
 			//open file
-			File f = new File("file2.txt");
+			File f = new File("versionFile.txt");
 		
 			//create a file reader
 			BufferedReader readFrom = new BufferedReader(new FileReader(f));
@@ -23,8 +26,17 @@ public class VersionData implements Data {
 			//if the line is blank read the next line
 			if(line.equals("")) line = readFrom.readLine();
 		
-			b.append(line + "<br>");
-		
+			while((line = readFrom.readLine()) != null) {
+				
+				if((line.indexOf("OS description") != -1) 
+						|| (line.indexOf("OS name") != -1) 
+						|| (line.indexOf("Current user") != -1)
+						|| (line.indexOf("data model") != -1)
+						|| (line.indexOf("Java home") != -1)) {
+					b.append(line.trim() + "<br>");	
+				}
+			}
+					
 			//close reader
 			readFrom.close();
 			
