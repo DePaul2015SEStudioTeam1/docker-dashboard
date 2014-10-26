@@ -1,6 +1,6 @@
 echo off
-mdfind -name SampleMockAgent | xargs -I {} cp -r {} ~/Desktop
-cd ~/Desktop/SampleMockAgent
+mdfind -name docker-dashboard | xargs -I {} cp -r {} ~/Desktop
+cd ~/Desktop/docker-dashboard
 touch freeMemoryFile.txt
 touch versionFile.txt
 touch ipFile.txt
