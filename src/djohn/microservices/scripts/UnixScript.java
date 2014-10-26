@@ -23,10 +23,10 @@ class UnixScript implements Scripts {
 			
 			//create batch file and retrieve system metrics using sigar.jar
 			String b = "echo off\n" + 
-					"mdfind -name SampleMockAgent | xargs -I {} cp -r {} ~/Desktop\n" +
-					"cd ~/Desktop/SampleMockAgent\n" +
+					"mdfind -name docker-dashboard | xargs -I {} cp -r {} ~/Desktop\n" +
+					"cd ~/Desktop/docker-dashboard\n" +
 					"touch freeMemoryFile.txt\n" +
-					"touch version.txt\n" +
+					"touch versionFile.txt\n" +
 					"touch ipFile.txt\n" +
 					"touch diskFile.txt\n" +
 					"touch cpuFile.txt\n" +

@@ -14,7 +14,7 @@ interface Scripts {
 	public boolean canExcute();
 	public ScriptType getScriptType();
 	
-	final String USER_DESKTOP = "~/Desktop/SampleMockAgent/";
+	final String USER_DESKTOP = "~/Desktop/docker-dashboard/";
 	final String LOG_FILE = "log.html";
 	
 }
