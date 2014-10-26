@@ -1,0 +1,54 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'mysql' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ 'mysql@0.9', null ]
+6 verbose cache add name=undefined spec="mysql@0.9" args=["mysql@0.9",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'mysql@0.9',
+7 verbose parsed url   path: 'mysql@0.9',
+7 verbose parsed url   href: 'mysql@0.9' }
+8 verbose cache add name="mysql" spec="0.9" args=["mysql","0.9"]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: '0.9',
+9 verbose parsed url   path: '0.9',
+9 verbose parsed url   href: '0.9' }
+10 verbose addNamed [ 'mysql', '0.9' ]
+11 verbose addNamed [ null, '>=0.9.0-0 <0.10.0-0' ]
+12 silly lockFile 3ab7ea9d-mysql-0-9 mysql@0.9
+13 verbose lock mysql@0.9 /Users/tokenofid/.npm/3ab7ea9d-mysql-0-9.lock
+14 silly lockFile 3ab7ea9d-mysql-0-9 mysql@0.9
+15 error Error: Attempt to unlock mysql@0.9, which hasn't been locked
+15 error     at unlock (/usr/local/lib/node_modules/npm/lib/utils/locker.js:44:11)
+15 error     at cb (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:32:5)
+15 error     at /usr/local/lib/node_modules/npm/lib/cache/add-named.js:41:20
+15 error     at /usr/local/lib/node_modules/npm/lib/utils/locker.js:30:7
+15 error     at cb (/usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+15 error     at /usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+15 error     at Object.oncomplete (fs.js:107:15)
+16 error If you need help, you may report this *entire* log,
+16 error including the npm and node versions, at:
+16 error     <http://github.com/npm/npm/issues>
+17 error System Darwin 13.4.0
+18 error command "node" "/usr/local/bin/npm" "install" "mysql"
+19 error cwd /Users/tokenofid/Documents/DePaul/SE491/project/docker-dashboard/dashboard
+20 error node -v v0.10.32
+21 error npm -v 1.4.28
+22 verbose exit [ 1, true ]
