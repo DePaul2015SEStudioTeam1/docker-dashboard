@@ -1,0 +1,120 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/tokenofid/Documents/DePaul/SE491/project/docker-dashboard/dashboard/nodecellar_example',
+5 verbose install   [ 'express', 'mongodb', 'socket.io' ] ]
+6 info preinstall wine-cellar@0.0.1
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'mongodb@1.1.8', null ]
+9 verbose cache add name=undefined spec="mongodb@1.1.8" args=["mongodb@1.1.8",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'mongodb@1.1.8',
+10 verbose parsed url   path: 'mongodb@1.1.8',
+10 verbose parsed url   href: 'mongodb@1.1.8' }
+11 verbose cache add [ 'socket.io@0.9.10', null ]
+12 verbose cache add name=undefined spec="socket.io@0.9.10" args=["socket.io@0.9.10",null]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: 'socket.io@0.9.10',
+13 verbose parsed url   path: 'socket.io@0.9.10',
+13 verbose parsed url   href: 'socket.io@0.9.10' }
+14 verbose cache add [ 'express@3.x', null ]
+15 verbose cache add name=undefined spec="express@3.x" args=["express@3.x",null]
+16 verbose parsed url { protocol: null,
+16 verbose parsed url   slashes: null,
+16 verbose parsed url   auth: null,
+16 verbose parsed url   host: null,
+16 verbose parsed url   port: null,
+16 verbose parsed url   hostname: null,
+16 verbose parsed url   hash: null,
+16 verbose parsed url   search: null,
+16 verbose parsed url   query: null,
+16 verbose parsed url   pathname: 'express@3.x',
+16 verbose parsed url   path: 'express@3.x',
+16 verbose parsed url   href: 'express@3.x' }
+17 verbose cache add name="mongodb" spec="1.1.8" args=["mongodb","1.1.8"]
+18 verbose parsed url { protocol: null,
+18 verbose parsed url   slashes: null,
+18 verbose parsed url   auth: null,
+18 verbose parsed url   host: null,
+18 verbose parsed url   port: null,
+18 verbose parsed url   hostname: null,
+18 verbose parsed url   hash: null,
+18 verbose parsed url   search: null,
+18 verbose parsed url   query: null,
+18 verbose parsed url   pathname: '1.1.8',
+18 verbose parsed url   path: '1.1.8',
+18 verbose parsed url   href: '1.1.8' }
+19 verbose addNamed [ 'mongodb', '1.1.8' ]
+20 verbose addNamed [ '1.1.8', '1.1.8' ]
+21 verbose cache add name="socket.io" spec="0.9.10" args=["socket.io","0.9.10"]
+22 verbose parsed url { protocol: null,
+22 verbose parsed url   slashes: null,
+22 verbose parsed url   auth: null,
+22 verbose parsed url   host: null,
+22 verbose parsed url   port: null,
+22 verbose parsed url   hostname: null,
+22 verbose parsed url   hash: null,
+22 verbose parsed url   search: null,
+22 verbose parsed url   query: null,
+22 verbose parsed url   pathname: '0.9.10',
+22 verbose parsed url   path: '0.9.10',
+22 verbose parsed url   href: '0.9.10' }
+23 verbose addNamed [ 'socket.io', '0.9.10' ]
+24 verbose addNamed [ '0.9.10', '0.9.10' ]
+25 verbose cache add name="express" spec="3.x" args=["express","3.x"]
+26 verbose parsed url { protocol: null,
+26 verbose parsed url   slashes: null,
+26 verbose parsed url   auth: null,
+26 verbose parsed url   host: null,
+26 verbose parsed url   port: null,
+26 verbose parsed url   hostname: null,
+26 verbose parsed url   hash: null,
+26 verbose parsed url   search: null,
+26 verbose parsed url   query: null,
+26 verbose parsed url   pathname: '3.x',
+26 verbose parsed url   path: '3.x',
+26 verbose parsed url   href: '3.x' }
+27 verbose addNamed [ 'express', '3.x' ]
+28 verbose addNamed [ null, '>=3.0.0-0 <4.0.0-0' ]
+29 silly lockFile aecb22b5-mongodb-1-1-8 mongodb@1.1.8
+30 verbose lock mongodb@1.1.8 /Users/tokenofid/.npm/aecb22b5-mongodb-1-1-8.lock
+31 silly lockFile 5127d080-socket-io-0-9-10 socket.io@0.9.10
+32 verbose lock socket.io@0.9.10 /Users/tokenofid/.npm/5127d080-socket-io-0-9-10.lock
+33 silly lockFile 3a341b85-express-3-x express@3.x
+34 verbose lock express@3.x /Users/tokenofid/.npm/3a341b85-express-3-x.lock
+35 silly lockFile aecb22b5-mongodb-1-1-8 mongodb@1.1.8
+36 error Error: Attempt to unlock mongodb@1.1.8, which hasn't been locked
+36 error     at unlock (/usr/local/lib/node_modules/npm/lib/utils/locker.js:44:11)
+36 error     at cb (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:32:5)
+36 error     at /usr/local/lib/node_modules/npm/lib/cache/add-named.js:41:20
+36 error     at /usr/local/lib/node_modules/npm/lib/utils/locker.js:30:7
+36 error     at cb (/usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+36 error     at /usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+36 error     at Object.oncomplete (fs.js:107:15)
+37 error If you need help, you may report this *entire* log,
+37 error including the npm and node versions, at:
+37 error     <http://github.com/npm/npm/issues>
+38 error System Darwin 13.4.0
+39 error command "node" "/usr/local/bin/npm" "install"
+40 error cwd /Users/tokenofid/Documents/DePaul/SE491/project/docker-dashboard/dashboard/nodecellar_example
+41 error node -v v0.10.32
+42 error npm -v 1.4.28
+43 verbose exit [ 1, true ]
